@@ -1,15 +1,15 @@
 <x-admin.index :user="$user" :isAdmin="$isAdmin">
     <div class="content-wrapper">
-        <a href="{{ route('department.create') }}" class="btn btn-primary mx-2">Add New Department</a>
+        <a href="{{ route('contact.create') }}" class="btn btn-primary mx-2">Add New Contact</a>
     </div>
 
     <div class="content-wrapper">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Department Data-Table</h4>
+                    <h4 class="card-title">Contact Data-Table</h4>
                     <p class="card-description">
-                        Department information table
+                        Contact information table
                     </p>
 
                     @if(session()->has('msg'))
@@ -19,7 +19,7 @@
                     <table class="table table-hover overflow-auto block">
                         <thead>
                         <tr class="bg-slate-800">
-                            @foreach(["Name", "Created At","Updated At", "Action"] as $heading)
+                            @foreach(["Name" , "Created At","Updated At", "Action"] as $heading)
                                 <th class="font-bold text-white">{{$heading}}</th>
                             @endforeach
                         </tr>
@@ -27,26 +27,26 @@
                         <tbody>
                         @foreach($data as $data)
                             <tr>
-                                <td>{{$data->name}}</td>
+                                <td>{{$data->first_name}}</td>
                                 <td>{{$data->created_at}}</td>
                                 <td>{{$data->updated_at}}</td>
                                 <td>
                                     <a
-                                        href="{{ route('department.edit', $data->id) }}"
+                                        href="{{ route('contact.edit', $data->id) }}"
                                         class="badge badge-primary cursor-pointer"
                                     >Edit</a
                                     >
                                 </td>
                                 <td>
                                     @if ($isAdmin === true)
-                                        <form method="POST" action="{{ route('department.destroy', $data->id) }}">
+                                        <form method="POST" action="{{ route('contact.destroy', $data->id) }}">
                                             @method('DELETE')
                                             @csrf
 
                                             <button
                                                 type="submit"
                                                 class="badge badge-danger cursor-pointer"
-                                                onclick="return confirmDeleteDepartment({{ $data->id }} , '{{ $data->name }}');"
+                                                onclick="return confirmDeleteContact({{ $data->id }} , '{{ $data->name }}');"
                                             >Delete</button>
                                         </form>
                                     @else
@@ -65,8 +65,8 @@
         </div>
     </div>
     <script>
-        function confirmDeleteDepartment(id, name) {
-            if(!confirm("Are You Sure to delete this department , Named: " + name + ", Id: " + id + "." ))
+        function confirmDeleteContact(id, name) {
+            if(!confirm("Are You Sure to delete this contact , Named: " + name + ", Id: " + id + "." ))
                 event.preventDefault();
         }
     </script>
