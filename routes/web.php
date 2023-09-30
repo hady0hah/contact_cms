@@ -44,6 +44,7 @@ Route::resource('department', \App\Http\Controllers\DepartmentController::class)
     'index', 'create', 'store', 'edit', 'update', 'destroy'
 ]);
 
+Route::match(['get', 'post'], '/contacts/search', 'App\Http\Controllers\AdminController@search')->name('contacts.search');
 
 
 
