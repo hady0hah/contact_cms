@@ -129,20 +129,40 @@ class AdminController extends Controller
 
 
         foreach ($csvData as $row) {
-            $contact = Contact::create([
-                'first_name' => $row[0],
-                'last_name' => $row[1],
-                'phone_number' => $row[2],
-                'DOT' => $row[3],
-                'city' => $row[4],
-            ]);
-            if (!empty($row[5])) {
-                $departmentIds = explode(',', $row[5]);
-                $contact->departments()->sync($departmentIds);
+            $date = \DateTime::createFromFormat('m/d/Y', $row[3]);
+            if(!$date)
+            $date = \DateTime::createFromFormat('Y-m-d', $row[3]);
+            if ($date) {
+                $formattedBirthDay = $date->format('Y-m-d');
+            }
+            try {
+                $contact = Contact::create([
+                    'first_name' => $row[0],
+                    'last_name' => $row[1],
+                    'phone_number' => $row[2],
+                    'DOT' => $formattedBirthDay,
+                    'city' => $row[4],
+                ]);
+
+                if (!empty($row[5])) {
+                    $departmentIds = explode(',', $row[5]);
+                    $contact->departments()->sync($departmentIds);
+                }
+            }catch (\Exception $e){
+                if (preg_match('/:\s*([^:]+):/', $e, $matches)) {
+                    $errorTitle = trim($matches[1]);
+                } else {
+                    $errorTitle = 'Unexpected Error Has Been Occurred , Please check your data and try again!';
+                }
+                session()->flash('error', 'Import failed: ' . $errorTitle);
             }
         }
 
-        return redirect()->route('admin.index')->with('success', 'Contacts imported successfully.');
+        if (session()->has('error')) {
+            return redirect()->route('admin.index')->with('error', session('error'));
+        } else {
+            return redirect()->route('admin.index')->with('success', 'Contacts imported successfully.');
+        }
     }
 
 }

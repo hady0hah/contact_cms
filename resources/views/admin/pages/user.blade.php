@@ -3,9 +3,9 @@
 		<div class="col-lg-8 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">User Data-Table</h4>					
+					<h4 class="card-title">User Data-Table</h4>
 					<p class="card-description">
-						User information table 
+						User information table
 					</p>
 					<table class="table table-hover">
 						<thead>
@@ -19,8 +19,8 @@
 							@if ($isAdmin === false)
 							<tr>
 								<td>Only Admin can</td>
-								<td>view or edit</td>								
-								<td>users</td>								
+								<td>view or edit</td>
+								<td>users</td>
 								<td>data</td>
 							</tr>
 							@else
@@ -29,24 +29,24 @@
 									<td>{{$data->name}}</td>
 									<td>{{$data->email}}</td>
 									<td>{{$data->created_at}}</td>
-									@if($data->usertype == "0")
+{{--									@if($data->usertype == "0")--}}
 									<td>
 										<form method="POST" action="{{ route('user.destroy', $data->id) }}">
 								        @method('DELETE')
 												@csrf
 
 								        <div class="form-group">
-								        	<button 
-								        		type="submit" 
-								        		class="badge badge-danger cursor-pointer" 
+								        	<button
+								        		type="submit"
+								        		class="badge badge-danger cursor-pointer"
 								        		onclick="return confirmDeleteUser({{ $data->id }} , '{{ $data->name }}');"
 								        		>Delete</button>
 								        </div>
 								    </form>
 									</td>
-									@else
-									<td><p class="badge badge-dark">Not allowded</p></td>
-									@endif
+{{--									@else--}}
+{{--									<td><p class="badge badge-dark">Not allowded</p></td>--}}
+{{--									@endif--}}
 								</tr>
 								@endforeach
 							@endif

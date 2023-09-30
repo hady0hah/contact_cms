@@ -5,6 +5,10 @@
               <div class="alert alert-success">
                   {{ session('success') }}
               </div>
+           @elseif(session('error'))
+              <div class="alert alert-danger">
+                  {{ session('error') }}
+              </div>
           @endif
       </div>
     <div class="card">
@@ -58,8 +62,9 @@
 
       <div class="card">
           <div class="card-header d-block d-md-flex">
-              <h5 class="mb-0">Search Contacts <i class="fa fa-search" aria-hidden="true"></i></h5>
-
+              <h5>Search Contacts <i class="fa fa-search" aria-hidden="true"></i></h5>
+          </div>
+          <div class="card-header d-block d-md-flex">
               <form id="search-form" class="d-flex justify-content-between align-items-center flex-wrap pl-2">
                   <div class="form-row">
                       <div class="col-md-3">
@@ -82,6 +87,9 @@
                   </div>
                   <button type="button" id="search-button" class="btn btn-primary ml-2">
                       Search <i class="fa fa-search" aria-hidden="true"></i>
+                  </button>
+                  <button type="button" id="clear-filters-button" class="btn btn-secondary ml-2">
+                      Reset <i class="fa fa-times" aria-hidden="true"></i>
                   </button>
               </form>
           </div>
@@ -149,6 +157,16 @@
 
             $('#submitImportButton').click(function () {
                 $('#importContactsForm').submit();
+            });
+        });
+
+        $(document).ready(function () {
+            $('#clear-filters-button').click(function () {
+                $('#first-name-input').val('');
+                $('#last-name-input').val('');
+                $('#phone-input').val('');
+                $('#department-filter').val('');
+                $('#search-button').click();
             });
         });
 

@@ -3,9 +3,7 @@
   class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
 >
   <div class="navbar-brand-wrapper d-flex align-items-center">
-    <a href="{{ route('admin.index') }}">
-      Home
-    </a>
+
   </div>
   <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
     <ul class="navbar-nav navbar-nav-right ml-auto">
