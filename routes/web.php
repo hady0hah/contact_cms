@@ -46,6 +46,10 @@ Route::resource('department', \App\Http\Controllers\DepartmentController::class)
 
 Route::match(['get', 'post'], '/contacts/search', 'App\Http\Controllers\AdminController@search')->name('contacts.search');
 
+/* import/export */
+Route::get('/contacts/export', 'App\Http\Controllers\AdminController@exportContacts')->name('contacts.export');
+Route::post('/contacts/import', 'App\Http\Controllers\AdminController@importContacts')->name('contacts.import');
+
 
 
 /* jetstream auth */
