@@ -129,11 +129,18 @@ class AdminController extends Controller
 
 
         foreach ($csvData as $row) {
-            $date = \DateTime::createFromFormat('m/d/Y', $row[3]);
-            if(!$date)
-            $date = \DateTime::createFromFormat('Y-m-d', $row[3]);
+            [$datePart, $timePart] = explode(' ', $row[3]);
+
+            $date = \DateTime::createFromFormat('m/d/Y', $datePart);
+
+            if (!$date) {
+                $date = \DateTime::createFromFormat('Y-m-d H:i', $row[3]);
+            }
+
             if ($date) {
-                $formattedBirthDay = $date->format('Y-m-d');
+                $formattedBirthDay = $date->format('Y-m-d H:i');
+            } else {
+                $formattedBirthDay = now()->format('Y-m-d H:i');
             }
             try {
                 $contact = Contact::create([

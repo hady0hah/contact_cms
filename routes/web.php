@@ -4,10 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\FoodMenuController;
-use App\Http\Controllers\SpecialDishController;
-use App\Http\Controllers\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------

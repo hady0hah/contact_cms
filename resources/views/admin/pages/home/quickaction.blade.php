@@ -112,7 +112,6 @@
             var lastName = $('#last-name-input').val();
             var phone = $('#phone-input').val();
             var department = $('#department-filter').val();
-            console.log(firstName,lastName,phone,department)
 
             $.ajax({
                 url: '{{ route("contacts.search") }}',
