@@ -22,8 +22,10 @@ Route::controller(HomeController::class)->group(function () {
 });
 
 /* Admin */
-Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin/dashboard', 'index')->name('admin.index');
+Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/admin/dashboard', 'index')->name('admin.index');
+    });
 });
 
 /* User */
@@ -49,9 +51,9 @@ Route::post('/contacts/import', 'App\Http\Controllers\AdminController@importCont
 
 
 /* jetstream auth */
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+//Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+//    Route::get('/dashboard', function () {
+//        return view('dashboard');
+//    })->name('dashboard');
+//});
 

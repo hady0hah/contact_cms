@@ -4,6 +4,7 @@
 
 </head>
 <body>
+test homepage
         @include("auth.login")
 
 </body>
