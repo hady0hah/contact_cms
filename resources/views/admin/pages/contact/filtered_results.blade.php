@@ -6,10 +6,11 @@
         <th class="font-bold text-white">Phone Number</th>
         <th class="font-bold text-white">Birth Date</th>
         <th class="font-bold text-white">City</th>
+        <th class="font-bold text-white">Department</th>
         <th class="font-bold text-white">Created At</th>
         <th class="font-bold text-white">Updated At</th>
     </tr>
-    </thead>
+    </thead>c
     <tbody>
     @if ($filteredContacts->count() > 0)
         @foreach ($filteredContacts as $contact)
@@ -19,6 +20,14 @@
                 <td>{{ $contact->phone_number }}</td>
                 <td>{{ $contact->DOT }}</td>
                 <td>{{ $contact->city }}</td>
+                <td>
+                    @foreach($contact->departments as $department)
+                        {{ $department->name }}
+                        @unless($loop->last)
+                            ,
+                        @endunless
+                    @endforeach
+                </td>
                 <td>{{ $contact->created_at }}</td>
                 <td>{{ $contact->updated_at }}</td>
             </tr>

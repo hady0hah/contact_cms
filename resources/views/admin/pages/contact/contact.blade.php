@@ -19,7 +19,7 @@
                     <table class="table table-hover overflow-auto block">
                         <thead>
                         <tr class="bg-slate-800">
-                            @foreach(["Name" , "Created At","Updated At", "Action"] as $heading)
+                            @foreach(["Name" , "Created At","Updated At", "","Actions"] as $heading)
                                 <th class="font-bold text-white">{{$heading}}</th>
                             @endforeach
                         </tr>
